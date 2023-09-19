@@ -346,11 +346,20 @@ C:\Users\sunny\source\repos\CSharp Assemblies\CSharp Assemblies>dir
 //    }
 //}
 
-class MeSecondModule
+//class MeSecondModule
+//{
+//    public static void Hello()
+//    {
+//        Console.WriteLine("Helllo from module 2");
+//    }
+//}
+
+class MainClass
 {
-    public static void Hello()
+    static void Main()
     {
-        Console.WriteLine("Helllo from module 2");
+        MeFirstModule.Hello();
+        MeSecondModule.Hello();
     }
 }
 
