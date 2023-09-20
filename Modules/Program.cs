@@ -2,6 +2,7 @@
 
 //ref link:https://www.youtube.com/watch?v=MHQmnlVI-ak&list=PLRwVmtr-pp06rfSgNYu_oBg40DkwXiRHt&index=5
 // assembly - .dll, .exe, also creates module
+// assembly - logical grouping of files
 
 // Metadata - ex: that starts with a (dot).assembly - is a executable that just data sits there and does absolutely nothing(see attribute and reflections)
 
@@ -325,6 +326,166 @@ C:\Users\sunny\source\repos\CSharp Assemblies\CSharp Assemblies>dir
                5 File(s)         21,347 bytes
                5 Dir(s)  490,476,625,920 bytes free
 
+C:\Users\sunny\source\repos\Modules\Modules>csc /addmodule:MeFirstModule.netmodule,MeSecondModule.netmodule Program.cs
+Microsoft (R) Visual C# Compiler version 4.7.0-3.23416.8 (43b0b05c)
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+C:\Users\sunny\source\repos\Modules\Modules>dir
+ Volume in drive C has no label.
+ Volume Serial Number is DAE4-938D
+
+ Directory of C:\Users\sunny\source\repos\Modules\Modules
+
+20/09/2023  07:55 am    <DIR>          .
+20/09/2023  07:55 am    <DIR>          ..
+20/09/2023  07:36 am    <DIR>          bin
+20/09/2023  07:43 am             3,072 MeFirstModule.netmodule
+20/09/2023  07:46 am             3,072 MeSecondModule.netmodule
+20/09/2023  07:43 am               692 moo.res
+20/09/2023  07:43 am             1,635 moo.txt
+20/09/2023  07:36 am    <DIR>          obj
+20/09/2023  07:53 am            13,844 Program.cs
+20/09/2023  07:55 am             4,096 Program.exe
+20/09/2023  07:36 am    <DIR>          Properties
+               6 File(s)         26,411 bytes
+               5 Dir(s)  490,491,740,160 bytes free
+
+C:\Users\sunny\source\repos\Modules\Modules>Program.exe
+Helllo from module 1
+Helllo from module 2
+
+------- using reflections
+C:\Users\sunny\source\repos\Modules\Modules>ildasm /out:moo.txt Program.exe
+
+C:\Users\sunny\source\repos\Modules\Modules>moo.txt
+----------------------NOTEPAD: moo.txt--------------------------------
+
+
+//  Microsoft (R) .NET Framework IL Disassembler.  Version 4.8.3928.0
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+
+// Metadata version: v4.0.30319
+.module extern MeFirstModule.netmodule
+.module extern MeSecondModule.netmodule
+.assembly extern mscorlib
+{
+  .publickeytoken = (B7 7A 5C 56 19 34 E0 89 )                         // .z\V.4..
+  .ver 4:0:0:0
+}
+.assembly Program
+{
+  .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilationRelaxationsAttribute::.ctor(int32) = ( 01 00 08 00 00 00 00 00 ) 
+  .custom instance void [mscorlib]System.Runtime.CompilerServices.RuntimeCompatibilityAttribute::.ctor() = ( 01 00 01 00 54 02 16 57 72 61 70 4E 6F 6E 45 78   // ....T..WrapNonEx
+                                                                                                             63 65 70 74 69 6F 6E 54 68 72 6F 77 73 01 )       // ceptionThrows.
+
+  // --- The following custom attribute is added automatically, do not uncomment -------
+  //  .custom instance void [mscorlib]System.Diagnostics.DebuggableAttribute::.ctor(valuetype [mscorlib]System.Diagnostics.DebuggableAttribute/DebuggingModes) = ( 01 00 07 01 00 00 00 00 ) 
+
+  .hash algorithm 0x00008004
+  .ver 0:0:0:0
+}
+.file MeFirstModule.netmodule
+    .hash = (E2 1F D4 B0 AB 38 EE 6D 0E D6 F0 8B C1 50 B0 D1   // .....8.m.....P..
+             D0 C9 59 CA )                                     // ..Y.
+.file MeSecondModule.netmodule
+    .hash = (FE 1D 1F 87 5C 79 BA E5 61 81 38 60 91 20 04 44   // ....\y..a.8`. .D
+             84 BF F5 A8 ) 
+.module Program.exe
+// MVID: {EF0E7364-A1DB-45CB-A120-198BB560A3C4}
+.custom instance void System.Runtime.CompilerServices.RefSafetyRulesAttribute::.ctor(int32) = ( 01 00 0B 00 00 00 00 00 ) 
+.imagebase 0x00400000
+.file alignment 0x00000200
+.stackreserve 0x00100000
+.subsystem 0x0003       // WINDOWS_CUI
+.corflags 0x00000001    //  ILONLY
+// Image base: 0x04DE0000
+
+
+// =============== CLASS MEMBERS DECLARATION ===================
+
+.class private auto ansi sealed beforefieldinit Microsoft.CodeAnalysis.EmbeddedAttribute
+       extends [mscorlib]System.Attribute
+{
+  .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = ( 01 00 00 00 ) 
+  .custom instance void Microsoft.CodeAnalysis.EmbeddedAttribute::.ctor() = ( 01 00 00 00 ) 
+  .method public hidebysig specialname rtspecialname 
+          instance void  .ctor() cil managed
+  {
+    // Code size       8 (0x8)
+    .maxstack  8
+    IL_0000:  ldarg.0
+    IL_0001:  call       instance void [mscorlib]System.Attribute::.ctor()
+    IL_0006:  nop
+    IL_0007:  ret
+  } // end of method EmbeddedAttribute::.ctor
+
+} // end of class Microsoft.CodeAnalysis.EmbeddedAttribute
+
+.class private auto ansi sealed beforefieldinit System.Runtime.CompilerServices.RefSafetyRulesAttribute
+       extends [mscorlib]System.Attribute
+{
+  .custom instance void [mscorlib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = ( 01 00 00 00 ) 
+  .custom instance void Microsoft.CodeAnalysis.EmbeddedAttribute::.ctor() = ( 01 00 00 00 ) 
+  .custom instance void [mscorlib]System.AttributeUsageAttribute::.ctor(valuetype [mscorlib]System.AttributeTargets) = ( 01 00 02 00 00 00 02 00 54 02 0D 41 6C 6C 6F 77   // ........T..Allow
+                                                                                                                         4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
+                                                                                                                         72 69 74 65 64 00 )                               // rited.
+  .field public initonly int32 Version
+  .method public hidebysig specialname rtspecialname 
+          instance void  .ctor(int32 A_1) cil managed
+  {
+    // Code size       15 (0xf)
+    .maxstack  8
+    IL_0000:  ldarg.0
+    IL_0001:  call       instance void [mscorlib]System.Attribute::.ctor()
+    IL_0006:  nop
+    IL_0007:  ldarg.0
+    IL_0008:  ldarg.1
+    IL_0009:  stfld      int32 System.Runtime.CompilerServices.RefSafetyRulesAttribute::Version
+    IL_000e:  ret
+  } // end of method RefSafetyRulesAttribute::.ctor
+
+} // end of class System.Runtime.CompilerServices.RefSafetyRulesAttribute
+
+.class private auto ansi beforefieldinit MainClass
+       extends [mscorlib]System.Object
+{
+  .method private hidebysig static void  Main() cil managed
+  {
+    .entrypoint
+    // Code size       14 (0xe)
+    .maxstack  8
+    IL_0000:  nop
+    IL_0001:  call       void [.module MeFirstModule.netmodule]MeFirstModule::Hello()
+    IL_0006:  nop
+    IL_0007:  call       void [.module MeSecondModule.netmodule]MeSecondModule::Hello()
+    IL_000c:  nop
+    IL_000d:  ret
+  } // end of method MainClass::Main
+
+  .method public hidebysig specialname rtspecialname 
+          instance void  .ctor() cil managed
+  {
+    // Code size       8 (0x8)
+    .maxstack  8
+    IL_0000:  ldarg.0
+    IL_0001:  call       instance void [mscorlib]System.Object::.ctor()
+    IL_0006:  nop
+    IL_0007:  ret
+  } // end of method MainClass::.ctor
+
+} // end of class MainClass
+
+
+// =============================================================
+
+// *********** DISASSEMBLY COMPLETE ***********************
+// WARNING: Created Win32 resource file moo.res
+
+
+----------------------------------------------------------------------
 
 
  * 
